@@ -21,6 +21,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,7 +37,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             LearningComposeTheme {
-                var count by mutableStateOf(0)
+                var count by remember{
+                    mutableStateOf(0) // This tells that the variable count is a state that can be changed and starts with a default value of 0
+                }
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
@@ -44,9 +47,12 @@ class MainActivity : ComponentActivity() {
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
-                    Text(text = count.toString())
+                    Text(
+                        text = count.toString(),
+                        fontSize = 30.sp
+                    )
                     Button(onClick = {
-
+                        count++ // when the count changes, since it is a mutable, the code will look for where count is used and it would run that column of code
                     }){
                         Text(text = "Click me!")
                     }
