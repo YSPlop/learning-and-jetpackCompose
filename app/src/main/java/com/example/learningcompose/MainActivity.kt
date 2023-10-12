@@ -25,66 +25,18 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.learningcompose.ui.theme.LearningComposeTheme
-import com.google.android.gms.wallet.button.ButtonConstants
+import com.example.learningcompose.ui.HelpScreen
+import com.example.safecircle.ui.theme.SafeCircleTheme
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            LearningComposeTheme {
+            SafeCircleTheme {
 
-                var name by remember{
-                    mutableStateOf("")
-                }
+                HelpScreen()
 
-                var names by remember{
-                    mutableStateOf(listOf<String>())
-                }
-
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(16.dp),
-                ) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        OutlinedTextField(
-                            value = name,
-                            onValueChange = { text ->
-                                name = text
-                            }, // This is so that when you type a name it would show the changed updated name
-                            modifier = Modifier.weight(1f)
-                        )
-                        Spacer(modifier = Modifier.width(8.dp))
-                        ElevatedButton(onClick = {
-                            if (name.isNotBlank()){
-                                names = names + name
-                                names = names.sorted()
-                                name = "" // after you add the name you can clear the field
-                            }
-                        }
-                            ) {
-                            Text(text = "Add")
-                        }    
-                        
-                    }
-
-                    LazyColumn{
-                        items(names){currentName ->
-                            Text(
-                                text = currentName,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(16.dp)
-                            )
-                            Divider()
-
-                        }
-                    }
-                }
             }
         }
     }
